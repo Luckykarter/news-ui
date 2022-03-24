@@ -6,7 +6,7 @@ export function getArticles(keywords, from_date, to_date, ordering) {
         articlesUrl,
         {
             params: {
-                keywords: keywords,
+                search: keywords,
                 from_date: from_date,
                 to_date: to_date,
                 ordering: ordering,
