@@ -1,5 +1,5 @@
 <template>
-<!--  search elements-->
+  <!-- search elements-->
   <div class="row my-2">
     <div class="col-lg-3 my-1">
       <input type="text" class="form-control" placeholder="Keywords" v-model="keywords" v-on:keyup.enter="refresh()">
@@ -17,6 +17,7 @@
 
   <div class="my-5">
     <div class="row">
+      <!-- counter-->
       <div class="col-lg-2">
         <div v-if="!loaded" class="spinner-border"></div>
         <div v-if="loaded">
@@ -24,15 +25,18 @@
           <h5 v-if="totalArticles > 0">{{ totalArticles }} News</h5>
         </div>
       </div>
+      <!-- sort dropdown-->
       <div class="col-lg-auto ms-auto">
         <select class="form-select my-2" @change="refresh()" v-model="ordering">
-          <option value="">Sort By</option>
-          <option value="timestamp">Date</option>
-          <option value="author">Author</option>
-          <option value="title">Title</option>
+          <option value="">Newest first</option>
+          <option value="timestamp">Oldest first</option>
+          <option value="author">Sort by Author</option>
+          <option value="title">Sort by Title</option>
         </select>
       </div>
     </div>
+
+    <!-- articles -->
     <div class="border-top border-1" id="news-container" ref="news-container">
       <div class="row mx-2 my-3 border-bottom" v-for="article in articles" v-bind:key="article.id">
         <h5 class="article-title">{{ article.title }}</h5>
@@ -43,7 +47,9 @@
           <div class="col-lg-9 my-2">
             <div class="">
               {{ article.description }}
-              <a class="link-dark" v-bind:href="article.external_url" v-if="article.external_url" target="_blank">Continue reading</a>
+              <a class="link-dark" v-bind:href="article.external_url" v-if="article.external_url" target="_blank">
+                Continue reading
+              </a>
             </div>
             <div class="">
               {{ article.publishedBy }}
