@@ -1,6 +1,6 @@
 <template>
   <div class="px-4">
-    <h2 class="my-2">News Reader</h2>
+    <h2 class="mb-4 mt-2 copperplate">News Reader</h2>
     <ArticlesView></ArticlesView>
   </div>
 
