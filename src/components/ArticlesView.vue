@@ -46,7 +46,7 @@
           </div>
           <div class="col-lg-9 my-2">
             <div class="">
-              {{ article.description }}
+              <span v-html="article.description"></span>
               <a class="link-dark" v-bind:href="article.external_url" v-if="article.external_url" target="_blank">
                 Continue reading
               </a>
