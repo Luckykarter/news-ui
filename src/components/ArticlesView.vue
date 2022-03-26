@@ -2,15 +2,20 @@
   <!-- search elements-->
   <div class="row my-2 copperplate">
     <div class="col-lg-3 my-1">
-      <input type="text" class="form-control" placeholder="Keywords" v-model="keywords" v-on:keyup.enter="refresh()">
+      <label for="keywords" v-if="isSafari">Search</label>
+      <input type="text" class="form-control" id="keywords" placeholder="Keywords"
+             v-model="keywords" v-on:keyup.enter="refresh()">
     </div>
     <div class="col-lg-2 my-1">
+      <label for="search-from" v-if="isSafari">From</label>
       <input type="date" id="search-from" class="form-control search-date" v-model="from_date">
     </div>
     <div class="col-lg-2 my-1">
+      <label for="search-till" v-if="isSafari">Till</label>
       <input type="date" id="search-till" class="form-control search-date" v-model="to_date">
     </div>
     <div class="col-lg-auto my-1 ms-auto">
+      <div class="mt-4" v-if="isSafari"></div>
       <button class="btn btn-outline-secondary" id="search-btn" @click="refresh()">Search</button>
     </div>
   </div>
@@ -18,7 +23,7 @@
   <div class="my-5">
     <div class="row">
       <!-- counter-->
-      <div class="col-lg-2 copperplate">
+      <div class="col-lg-4 copperplate">
         <div v-if="!loaded" class="spinner-border"></div>
         <div v-if="loaded">
           <h5 v-if="totalArticles <= 0">No News yet...</h5>
@@ -67,6 +72,7 @@
 
 <script>
 import {getArticles, getMoreArticles, getDate} from "@/modules/articles";
+import {isSafari} from "@/main";
 
 export default {
   name: "ArticlesView",
@@ -80,7 +86,8 @@ export default {
       keywords: "",
       to_date: "",
       from_date: "",
-      ordering: ""
+      ordering: "",
+      isSafari: false,
     };
   },
   methods: {
@@ -123,6 +130,7 @@ export default {
     }
   },
   beforeMount() {
+    this.isSafari = isSafari()
     this.refresh();
   },
   mounted() {
@@ -139,10 +147,6 @@ export default {
   overflow-y: scroll;
 }
 
-.position-absolute {
-  display: block;
-}
-
 .article-title {
   color: #4153B6;
 }
@@ -151,7 +155,12 @@ export default {
   min-width: 170pt;
 }
 
-#sort-by {
-  min-width: 80pt;
+.form-control {
+  /*
+    Tweak for MacOS Safari
+    For some reason - date input fields are higher than text there
+  */
+  max-height: 28pt;
 }
+
 </style>
