@@ -94,7 +94,7 @@ export default {
     getNextArticles() {
       const newsContainer = this.$refs["news-container"];
       newsContainer.onscroll = () => {
-        const bottomOfWindow = newsContainer.scrollTop + newsContainer.offsetHeight > newsContainer.scrollHeight - 10;
+        const bottomOfWindow = newsContainer.scrollTop + newsContainer.offsetHeight > newsContainer.scrollHeight / 1.2 ;
         if (bottomOfWindow) {
           if (this.nextUrl && !this.loadingMore) {
             this.loadingMore = true;

@@ -10,7 +10,7 @@ export function getArticles(keywords, from_date, to_date, ordering) {
                 from_date: from_date,
                 to_date: to_date,
                 ordering: ordering,
-                limit: 5,
+                limit: 10,
                 offset: 0
             }
         }
